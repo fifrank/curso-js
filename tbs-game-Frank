@@ -1,0 +1,32 @@
+var peleadores = [
+        {
+            nombre : "zocaton",
+            vida : 100,
+            ataque : 10,
+            defensa : 10
+        },
+        {
+            nombre : "mamon",
+            vida : 80,
+            ataque : 15,
+            defensa : 3
+        }
+    ],
+    turno = 1,
+    peleador1 = peleadores[0],
+    peleador2 = peleadores[1]
+
+console.log("Comienza la pelea!")
+console.log("")
+putasos(peleador1, peleador2)
+
+function putasos(ataca, recibe){
+    console.log(`Turno: ${turno++}: ${ataca.nombre} ataca a ${recibe.nombre}`)
+    recibe.defensa = (recibe.defensa - (ataca.ataque*.010)  <=0) ? 0: recibe.defensa - (ataca.ataque*.010)
+    let daño = (ataca.ataque - recibe.defensa <=0) ? 0 : ataca.ataque - recibe.defensa
+    console.log(`Daño realizado: ${Math.round(daño)}`)
+    recibe.vida = recibe.vida - daño
+    if(recibe.vida <= 0) return console.log(`${recibe.nombre} se ha quedado sin vida! ${ataca.nombre} es el ganador!`) 
+    console.log(`Vida restante: ${Math.round(recibe.vida)}`)
+    putasos(recibe, ataca)
+}
